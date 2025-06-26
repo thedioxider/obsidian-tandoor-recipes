@@ -37,7 +37,7 @@ export function tandoorToRecipe(tandoor: TandoorImport): Recipe {
 						label: cleanString(td.servings_text),
 					},
 	};
-	td.steps.forEach((tstep) =>
+	for (let tstep of td.steps) {
 		recipe.steps.push({
 			name: cleanString(tstep.name),
 			instruction: cleanString(tstep.instruction) ?? "",
@@ -48,29 +48,41 @@ export function tandoorToRecipe(tandoor: TandoorImport): Recipe {
 							let ing: any = {};
 							ing.amount =
 								ting.no_amount || ting.amount == 0 ? undefined : ting.amount;
-							let pl_name = cleanString(ting.food.plural_name);
-							ing.name =
-								(ting.always_use_plural_food || ing.amount !== 1) &&
-								pl_name !== undefined
-									? pl_name
-									: ting.food.name;
-							if (ting.unit !== null && ting.unit !== undefined) {
-								let pl_unit = cleanString(ting.unit.plural_name);
-								ing.unit =
-									(ting.always_use_plural_unit || ing.amount !== 1) &&
-									pl_unit !== undefined
-										? pl_unit
-										: ting.unit.name;
-								let unit_desc = cleanString(ting.unit.description);
-								if (unit_desc !== undefined) {
-									ing.unit += ` (${unit_desc})`;
-								}
-								ing.note = cleanString(ting.note);
-								return ing;
+							if (ing.amount !== undefined) {
+								let pl_name = cleanString(ting.food.plural_name);
+								ing.name =
+									(ting.always_use_plural_food || ing.amount !== 1) &&
+									pl_name !== undefined
+										? pl_name
+										: ting.food.name;
+							} else {
+								ing.name = ting.food.name;
 							}
+							ing.name = cleanString(ing.name);
+							if (ting.unit !== null && ting.unit !== undefined) {
+								if (ing.amount !== undefined) {
+									let pl_unit = cleanString(ting.unit.plural_name);
+									ing.unit =
+										(ting.always_use_plural_unit || ing.amount !== 1) &&
+										pl_unit !== undefined
+											? pl_unit
+											: ting.unit.name;
+								} else {
+									ing.unit = ting.unit.name;
+								}
+								ing.unit = cleanString(ing.unit);
+								if (ing.unit !== undefined) {
+									let unit_desc = cleanString(ting.unit.description);
+									if (unit_desc !== undefined) {
+										ing.unit += ` (${unit_desc})`;
+									}
+								}
+							}
+							ing.note = cleanString(ting.note);
+							return ing;
 						}),
 			time: tstep.time == 0 ? undefined : tstep.time,
-		}),
-	);
+		});
+	}
 	return recipe;
 }
