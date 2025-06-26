@@ -9,6 +9,8 @@ import {
 	Setting,
 } from "obsidian";
 
+import { fileContextMenu } from "./context-menu";
+
 // Remember to rename these classes and interfaces!
 
 interface TandoorRecipesSettings {
@@ -24,6 +26,8 @@ export default class TandoorRecipesPlugin extends Plugin {
 
 	async onload() {
 		await this.loadSettings();
+
+		this.registerEvent(fileContextMenu(this));
 
 		// This creates an icon in the left ribbon.
 		const ribbonIconEl = this.addRibbonIcon(
