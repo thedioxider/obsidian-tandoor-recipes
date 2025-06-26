@@ -26,12 +26,12 @@ type TandoorStep = {
 type TandoorIngredient = {
 	food: {
 		name: string;
-		plural_name: string;
+		plural_name?: string;
 	};
 	unit: {
 		name: string;
-		plural_name: string;
-		description: string;
+		plural_name?: string;
+		description?: string;
 	};
 	amount: number;
 	note: string;

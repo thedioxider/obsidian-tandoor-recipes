@@ -22,11 +22,6 @@ class RecipeStep {
 	instruction: string;
 	ingredients?: RecipeIngredient[];
 	time?: number;
-
-	constructor(instruction: string, name?: string) {
-		this.name = name;
-		this.instruction = instruction;
-	}
 }
 
 class RecipeIngredient {
@@ -34,11 +29,4 @@ class RecipeIngredient {
 	amount?: number;
 	unit?: string;
 	note?: string;
-
-	constructor(name: string, amount?: number, unit?: string, note?: string) {
-		this.name = name;
-		this.amount = amount;
-		this.unit = unit;
-		this.note = note;
-	}
 }
