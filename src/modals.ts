@@ -1,15 +1,19 @@
 import { App, Modal, Notice, Setting } from "obsidian";
 
+const pathFormat: RegExp = /^\/?(?:[a-z_\-\s0-9\.]+\/)?([a-z_\-\s0-9\.]+)$/i;
+
 export class InputFilenameModal extends Modal {
-	constructor(app: App, onSubmit: (result: string) => void) {
+	constructor(app: App, onSubmit: (result: string) => void, init?: string) {
 		super(app);
 		this.setTitle("Path of the recipe file");
 
 		let filepath = "";
 		new Setting(this.contentEl).addText((text) =>
-			text.onChange((value) => {
-				filepath = value;
-			}),
+			text
+				.setValue(init !== undefined && pathFormat.test(init) ? init : "")
+				.onChange((value) => {
+					filepath = value;
+				}),
 		);
 
 		new Setting(this.contentEl).addButton((btn) =>
@@ -18,7 +22,6 @@ export class InputFilenameModal extends Modal {
 				.setCta()
 				.onClick(() => {
 					this.close();
-					const pathFormat = /^\/?(?:[a-z_\-\s0-9\.]+\/)?([a-z_\-\s0-9\.]+)$/i;
 					if (pathFormat.test(filepath)) {
 						onSubmit(filepath);
 					} else {
