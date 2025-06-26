@@ -1,5 +1,6 @@
 import type { Menu, MenuItem, Plugin, TAbstractFile } from "obsidian";
-import { Notice, TFile } from "obsidian";
+import { TFile } from "obsidian";
+import { recipeToMd } from "./generator";
 
 import { parseTandoorFile, tandoorToRecipe } from "./parser";
 
@@ -14,11 +15,9 @@ export function fileContextMenu(plugin: Plugin) {
 						.setIcon("chef-hat")
 						.onClick(async () => {
 							const tandoor = await parseTandoorFile(file as TFile);
-							new Notice("Converting...");
 							const recipe = tandoorToRecipe(tandoor);
-							new Notice(`Recipe name: ${recipe.name}
-Number of steps: ${recipe.steps.length}
-Source: ${recipe.source}`);
+							const md = recipeToMd(recipe);
+							console.log(md);
 						});
 				});
 			}
