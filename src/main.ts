@@ -46,7 +46,7 @@ export default class TandoorRecipesPlugin extends Plugin {
 			id: "open-sample-modal-simple",
 			name: "Open sample modal (simple)",
 			callback: () => {
-				new TandoorRacipesModal(this.app).open();
+				new TandoorRecipesModal(this.app).open();
 			},
 		});
 		// This adds an editor command that can perform some operation on the current editor instance
@@ -70,7 +70,7 @@ export default class TandoorRecipesPlugin extends Plugin {
 					// If checking is true, we're simply "checking" if the command can be run.
 					// If checking is false, then we want to actually perform the operation.
 					if (!checking) {
-						new TandoorRacipesModal(this.app).open();
+						new TandoorRecipesModal(this.app).open();
 					}
 
 					// This command will only show up in Command Palette when the check function returns true
@@ -80,7 +80,7 @@ export default class TandoorRecipesPlugin extends Plugin {
 		});
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new TandoorRecipesSettingTab(this.app, this));
 
 		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
 		// Using this function will automatically remove the event listener when this plugin is disabled.
@@ -105,7 +105,7 @@ export default class TandoorRecipesPlugin extends Plugin {
 	}
 }
 
-class TandoorRacipesModal extends Modal {
+class TandoorRecipesModal extends Modal {
 	constructor(app: App) {
 		super(app);
 	}
