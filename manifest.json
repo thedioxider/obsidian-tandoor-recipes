@@ -3,7 +3,7 @@
 	"name": "Tandoor Recipes",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Import Tandoor recipes into your Obsidian vault.",
+	"description": "Import Tandoor recipes into your vault with ease!",
 	"author": "Diomentia",
 	"authorUrl": "https://diomentia.space",
 	"isDesktopOnly": false
