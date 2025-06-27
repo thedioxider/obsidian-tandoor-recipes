@@ -1,7 +1,7 @@
 import { App, Modal, Setting } from "obsidian";
 
 const pathFormat: RegExp =
-	/^\/?(?:[\p{L}_\-\s0-9\.]+\/)?([\p{L}_\-\s0-9\.]+)$/iu;
+	/^\/?(?:[\p{L}_\-\s0-9\.]+\/)*([\p{L}_\-\s0-9\.]+)$/iu;
 
 export class InputFilenameModal extends Modal {
 	constructor(app: App, onSubmit: (result: string) => void, init?: string) {

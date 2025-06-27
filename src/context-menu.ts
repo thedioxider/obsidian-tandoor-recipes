@@ -31,7 +31,11 @@ export function fileContextMenu(plugin: Plugin) {
 										plugin.app.fileManager.getNewFileParent(file.path, filename)
 											.path
 									}/${filename}.md`;
-									if (vault.getFileByPath(filepath) !== null) {
+									let folder = filepath.split("/").slice(0, -1).join("/");
+									if (vault.getFolderByPath(folder) === null) {
+										vault.createFolder(folder);
+									}
+									if (vault.getAbstractFileByPath(filepath) !== null) {
 										new Notice("File already exists");
 										return;
 									}
