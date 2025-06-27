@@ -53,9 +53,11 @@ ${frontmatter}\
 				md += `\n`;
 			}
 		}
-		// TODO insert step time
 		if (step.name !== undefined) {
 			md += `\n## ${step.name}\n`;
+		}
+		if (step.time !== undefined) {
+			md += `\ntimer:: ${step.time}\n`;
 		}
 		md += `\n${step.instruction}\n\n`;
 	}

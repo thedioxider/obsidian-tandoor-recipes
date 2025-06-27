@@ -40,6 +40,7 @@ export function fileContextMenu(plugin: Plugin) {
 										return;
 									}
 									vault.create(filepath, md);
+									new Notice("Recipe imported!");
 								},
 								recipe.name,
 							).open();

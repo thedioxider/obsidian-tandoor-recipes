@@ -71,12 +71,6 @@ export function tandoorToRecipe(tandoor: TandoorImport): Recipe {
 									ing.unit = ting.unit.name;
 								}
 								ing.unit = cleanString(ing.unit);
-								if (ing.unit !== undefined) {
-									let unit_desc = cleanString(ting.unit.description);
-									if (unit_desc !== undefined) {
-										ing.unit += ` (${unit_desc})`;
-									}
-								}
 							}
 							ing.note = cleanString(ting.note);
 							return ing;
