@@ -40,10 +40,12 @@ ${frontmatter}\
 	}
 	for (let step of r.steps) {
 		md += `---\n`;
-		// TODO ingredient notes as footnotes
 		if (step.ingredients !== undefined) {
 			for (let ing of step.ingredients) {
 				md += `- ${ing.name}`;
+				if (ing.note !== undefined) {
+					md += `^[${ing.note.split("\n").join("\\\n")}]`;
+				}
 				if (ing.amount !== undefined) {
 					md += `: ${ing.amount}`;
 					if (ing.unit !== undefined) {
