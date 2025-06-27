@@ -62,7 +62,3 @@ ${frontmatter}\
 
 	return md;
 }
-
-export function mdToFile(app: App, md: string, filepath: string) {
-	new Notice(filepath);
-}
