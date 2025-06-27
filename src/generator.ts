@@ -1,3 +1,4 @@
+import { App, Notice } from "obsidian";
 import { Recipe } from "./types/recipe";
 
 export function recipeToMd(recipe: Recipe) {
@@ -60,4 +61,8 @@ ${frontmatter}\
 	}
 
 	return md;
+}
+
+export function mdToFile(app: App, md: string, filepath: string) {
+	new Notice(filepath);
 }

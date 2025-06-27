@@ -1,20 +1,23 @@
-import { App, Modal, Notice, Setting } from "obsidian";
+import { App, Modal, Setting } from "obsidian";
 
-const pathFormat: RegExp = /^\/?(?:[a-z_\-\s0-9\.]+\/)?([a-z_\-\s0-9\.]+)$/i;
+const pathFormat: RegExp =
+	/^\/?(?:[\p{L}_\-\s0-9\.]+\/)?([\p{L}_\-\s0-9\.]+)$/iu;
 
 export class InputFilenameModal extends Modal {
 	constructor(app: App, onSubmit: (result: string) => void, init?: string) {
 		super(app);
-		this.setTitle("Path of the recipe file");
+		this.setTitle("Name of the recipe file");
 
-		let filepath = "";
-		new Setting(this.contentEl).addText((text) =>
-			text
-				.setValue(init !== undefined && pathFormat.test(init) ? init : "")
-				.onChange((value) => {
-					filepath = value;
-				}),
-		);
+		let filename = "";
+		new Setting(this.contentEl).addText((text) => {
+			text.onChange((value) => {
+				filename = value;
+			});
+			if (init !== undefined && pathFormat.test(init)) {
+				text.setValue(init);
+				filename = init;
+			}
+		});
 
 		new Setting(this.contentEl).addButton((btn) =>
 			btn
@@ -22,12 +25,7 @@ export class InputFilenameModal extends Modal {
 				.setCta()
 				.onClick(() => {
 					this.close();
-					if (pathFormat.test(filepath)) {
-						onSubmit(filepath);
-					} else {
-						new Notice("Illegal file path");
-						onSubmit("");
-					}
+					onSubmit(pathFormat.test(filename) ? filename : "");
 				}),
 		);
 	}
