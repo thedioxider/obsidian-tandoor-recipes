@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-tandoor-recipes",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "A plugin to import Tandoor recipes into an Obsidian vault.",
 	"main": "main.js",
 	"scripts": {
